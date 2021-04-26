@@ -64,7 +64,7 @@ DEFCONFIG="mido_defconfig"
 AnyKernel="https://github.com/shashank1436/anykernel"
 AnyKernelbranch="master"
 
-HOSST="Shashank's Buildbot"
+HOSST="shashank's Buildbot"
 USEER="Shashank"
 
 TOOLCHAIN="clang"
@@ -207,8 +207,6 @@ KERVER=$(make kernelversion)
                 zip -r "$ZIP" *
                 curl -sLo zipsigner-3.0.jar https://raw.githubusercontent.com/baalajimaestro/AnyKernel2/master/zipsigner-3.0.jar
                 java -jar zipsigner-3.0.jar "$ZIP".zip "$ZIP"-signed.zip
-                tg_post_msg "<b>Kernel Successfully Compiled For $DEVICE $CODENAME</b>%0A%0A<b>Date : </b><code>$(TZ=Europe/Rome date)</code>%0A<b>Device :</b> <code>$CODENAME</code>%0A<b>Kernel Version :</b> <code>$KERVER</code>%0A%0A<b>Compiler used :</b> <code>$KBUILD_COMPILER_STRING</code>%0A%0A<b>Kernel Zip Name :</b> <code>$ZIP</code>" "$CHATID"
-                tg_post_msg "<b>Changelog:</b>%0A%0A https://github.com/shashank1436/kernel_xiaomi_mido/commits/r11oc" "$CHATID"
                 tg_post_build "$ZIP"-signed.zip "$CHATID"
                 cd ..
                 rm -rf error.log
