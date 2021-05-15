@@ -205,7 +205,7 @@ KERVER=$(make kernelversion)
                 mv Image.gz-dtb zImage
                 export ZIP="$KERNEL_NAME"-OC-"$CODENAME"-"$DATE"
                 zip -r "$ZIP" *
-                curl -sLo zipsigner-3.0.jar https://raw.githubusercontent.com/baalajimaestro/AnyKernel2/master/zipsigner-3.0.jar
+                curl -sLo zipsigner-3.0.jar https://raw.githubusercontent.com/baalajimaestro/AnyKernel3/master/zipsigner-4.0.jar
                 java -jar zipsigner-3.0.jar "$ZIP".zip "$ZIP"-signed.zip
                 tg_post_build "$ZIP"-signed.zip "$CHATID"
                 cd ..
