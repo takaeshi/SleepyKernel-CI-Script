@@ -8,7 +8,7 @@ jobs:
           command: |
            git clone --depth=1 https://github.com/shashank1436/kernel_xiaomi_mido --single-branch -b r11staging mido
            cd mido
-           wget https://raw.githubusercontent.com/shashank1436/ci/oc/build.sh
+           wget https://raw.githubusercontent.com/shashank1436/ci/staging/build.sh
            bash build.sh
 workflows:
   version: 2.1
