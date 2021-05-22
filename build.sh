@@ -1,4 +1,4 @@
-#!/bin/bash
+#gz-dbash
 #
 # Copyright (C) 2020 Fox kernel project
 #
@@ -203,7 +203,7 @@ KERVER=$(make kernelversion)
                 cp -r "$IMG" zip/
                 cd zip
                 mv Image.gz-dtb zImage
-                export ZIP="$KERNEL_NAME"-OC-"$CODENAME"-"$DATE"
+                export ZIP="$KERNEL_NAME"-"$CODENAME"-"$DATE"
                 zip -r "$ZIP" *
                 curl -sLo zipsigner-3.0.jar https://raw.githubusercontent.com/shashank1436/anykernel/master/zipsigner-3.0.jar
                 java -jar zipsigner-3.0.jar "$ZIP".zip "$ZIP"-signed.zip
