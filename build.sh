@@ -1,6 +1,6 @@
-#gz-dbash
+#!/bin/bash
 #
-# Copyright (C) 2020 Fox kernel project
+# Copyright (C) 2021 Sleepy kernel project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -57,17 +57,17 @@ API_BOT="$api"
 
 DEVICE="Redmi Note 4/4X"
 CODENAME="mido"
-KERNEL_NAME="FoxKernel"
+KERNEL_NAME="SleepyKernel"
 
 DEFCONFIG="mido_defconfig"
 
 AnyKernel="https://github.com/shashank1436/anykernel"
 AnyKernelbranch="master"
 
-HOSST="shashank's Buildbot"
-USEER="Shashank"
+HOSST="shashank's buildbot"
+USEER="shashank"
 
-TOOLCHAIN="gcc"
+TOOLCHAIN="clang"
 
 # setup telegram env
 export BOT_MSG_URL="https://api.telegram.org/bot$API_BOT/sendMessage"
@@ -132,22 +132,14 @@ Start=$(date +"%s")
 if [ "$TOOLCHAIN" == clang  ]; then
 	echo clang
 	make -j$(nproc --all) O=out \
-                              ARCH=arm64 \
-	                      CC="ccache clang" \
-	                      AR=llvm-ar \
-	                      NM=llvm-nm \
-	                      STRIP=llvm-strip \
-	                      OBJCOPY=llvm-objcopy \
-	                      OBJDUMP=llvm-objdump \
-	                      OBJSIZE=llvm-size \
-	                      READELF=llvm-readelf \
-	                      HOSTCC=clang \
-	                      HOSTCXX=clang++ \
-	                      HOSTAR=llvm-ar \
-	                      CROSS_COMPILE=aarch64-linux-gnu- \
-	                      CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
-	                      CONFIG_DEBUG_SECTION_MISMATCH=y \
-	                      CONFIG_NO_ERROR_ON_MISMATCH=y   2>&1 | tee error.log
+                              AR=llvm-ar \
+                              NM=llvm-nm \
+                              OBJCOPY=llvm-objcopy \
+                              OBJDUMP=llvm-objdump \
+                              STRIP=llvm-strip \
+                              CC=clang \
+                              CROSS_COMPILE=aarch64-linux-gnu- \
+                              CROSS_COMPILE_ARM32=arm-linux-gnueabi  2>&1 | tee error.log
 elif [ "$TOOLCHAIN" == gcc  ]; then
 	echo gcc
 	make -j$(nproc --all) O=out \
@@ -203,7 +195,7 @@ KERVER=$(make kernelversion)
                 cp -r "$IMG" zip/
                 cd zip
                 mv Image.gz-dtb zImage
-                export ZIP="$KERNEL_NAME"-staging-"$CODENAME"-"$DATE"
+                export ZIP="$KERNEL_NAME"-Stagging-"$CODENAME"-"$DATE"
                 zip -r "$ZIP" *
                 curl -sLo zipsigner-3.0.jar https://raw.githubusercontent.com/shashank1436/anykernel/master/zipsigner-3.0.jar
                 java -jar zipsigner-3.0.jar "$ZIP".zip "$ZIP"-signed.zip
