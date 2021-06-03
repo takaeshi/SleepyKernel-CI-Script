@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2020 Fox kernel project
+# Copyright (C) 2021 Sleepy kernel project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -57,7 +57,7 @@ API_BOT="$api"
 
 DEVICE="Redmi Note 4/4X"
 CODENAME="mido"
-KERNEL_NAME="FoxKernel"
+KERNEL_NAME="SleepyKernel"
 
 DEFCONFIG="mido_defconfig"
 
@@ -65,7 +65,7 @@ AnyKernel="https://github.com/shashank1436/anykernel"
 AnyKernelbranch="master"
 
 HOSST="shashank's Buildbot"
-USEER="Shashank"
+USEER="shashank"
 
 TOOLCHAIN="clang"
 
@@ -133,21 +133,14 @@ if [ "$TOOLCHAIN" == clang  ]; then
 	echo clang
 	make -j$(nproc --all) O=out \
                               ARCH=arm64 \
-	                      CC="ccache clang" \
-	                      AR=llvm-ar \
-	                      NM=llvm-nm \
-	                      STRIP=llvm-strip \
-	                      OBJCOPY=llvm-objcopy \
-	                      OBJDUMP=llvm-objdump \
-	                      OBJSIZE=llvm-size \
-	                      READELF=llvm-readelf \
-	                      HOSTCC=clang \
-	                      HOSTCXX=clang++ \
-	                      HOSTAR=llvm-ar \
-	                      CROSS_COMPILE=aarch64-linux-gnu- \
-	                      CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
-	                      CONFIG_DEBUG_SECTION_MISMATCH=y \
-	                      CONFIG_NO_ERROR_ON_MISMATCH=y   2>&1 | tee error.log
+                              AR=llvm-ar \
+                              NM=llvm-nm \
+                              OBJCOPY=llvm-objcopy \
+                              OBJDUMP=llvm-objdump \
+                              STRIP=llvm-strip \
+                              CC=clang \
+                              CROSS_COMPILE=aarch64-linux-gnu- \
+                              CROSS_COMPILE_ARM32=arm-linux-gnueabi  2>&1 | tee error.log
 elif [ "$TOOLCHAIN" == gcc  ]; then
 	echo gcc
 	make -j$(nproc --all) O=out \
@@ -207,7 +200,7 @@ KERVER=$(make kernelversion)
                 zip -r "$ZIP" *
                 curl -sLo zipsigner-3.0.jar https://raw.githubusercontent.com/shashank1436/anykernel/master/zipsigner-3.0.jar
                 java -jar zipsigner-3.0.jar "$ZIP".zip "$ZIP"-signed.zip
-                tg_post_msg "<b>=============================</b> %0A <b>× FoxKernel For Redmi note 4/4x ×</b> %0A <b>=============================</b> %0A%0A <b>Date : </b> <code>$(TZ=India/Kolkata date)</code> %0A%0A <b>Device Code Name:</b> <code>$CODENAME</code> %0A%0A <b>Kernel Version :</b> <code>$KERVER</code> %0A%0A <b>Developer:</b> @jennifer1436 %0A%0A <b>Support group:</b> t.me/foxprojectx %0A%0A <b>Channel:</b> t.me/foxprojectxupdates %0A%0A <b>Changelog:</b> %0A https://github.com/shashank1436/kernel_xiaomi_mido/commits/r11 %0A%0A <b>Download Normal version:</b> %0A https://t.me/foxprojectxupdates/ %0A%0A <b>Download Overclock version:</b> %0A https://t.me/foxprojectxupdates/ %0A%0A <b>If you support my effort? Donate</b> %0A <b>Phonepe id:</b> <code>shashank1436@ybl</code> %0A%0A #foxkernel #mido" "$CHATID"
+                tg_post_msg "<b>=============================</b> %0A <b>× SleepyKernel For Redmi note 4/4x ×</b> %0A <b>=============================</b> %0A%0A <b>Date : </b> <code>$(TZ=India/Kolkata date)</code> %0A%0A <b>Device Code Name:</b> <code>$CODENAME</code> %0A%0A <b>Kernel Version :</b> <code>$KERVER</code> %0A%0A <b>Developer:</b> @jennifer1436 %0A%0A <b>Support group:</b> t.me/sleepyzzzz %0A%0A <b>Channel:</b> t.me/sleepyzzzzupdates %0A%0A <b>Changelog:</b> %0A https://github.com/shashank1436/kernel_xiaomi_mido/commits/r11 %0A%0A <b>Download Normal version:</b> %0A https://t.me/sleepyzzzzupdates/ %0A%0A <b>Download Overclock version:</b> %0A https://t.me/sleepyzzzzupdates/ %0A%0A <b>If you support my effort? Donate</b> %0A <b>Phonepe id:</b> <code>shashank1436@ybl</code> %0A%0A #sleepykernel #mido" "$CHATID"
                 tg_post_build "$ZIP"-signed.zip "$CHATID"
                 cd ..
                 rm -rf error.log
