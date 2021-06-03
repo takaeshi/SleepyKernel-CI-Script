@@ -140,7 +140,7 @@ if [ "$TOOLCHAIN" == clang  ]; then
                               STRIP=llvm-strip \
                               CC=clang \
                               CROSS_COMPILE=aarch64-linux-gnu- \
-                              CROSS_COMPILE_ARM32=arm-linux-gnueabi  2>&1 | tee error.log
+                              CROSS_COMPILE_ARM32=arm-linux-gnueabi-  2>&1 | tee error.log
 elif [ "$TOOLCHAIN" == gcc  ]; then
 	echo gcc
 	make -j$(nproc --all) O=out \
