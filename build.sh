@@ -132,6 +132,7 @@ Start=$(date +"%s")
 if [ "$TOOLCHAIN" == clang  ]; then
 	echo clang
 	make -j$(nproc --all) O=out \
+                              ARCH=arm64 \
                               AR=llvm-ar \
                               NM=llvm-nm \
                               OBJCOPY=llvm-objcopy \
