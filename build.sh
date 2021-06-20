@@ -64,7 +64,7 @@ DEFCONFIG="mido_defconfig"
 AnyKernel="https://github.com/shashank1436/anykernel"
 AnyKernelbranch="master"
 
-HOSST="shashank's Buildbot"
+HOSST="shashank's buildbot"
 USEER="shashank"
 
 TOOLCHAIN="clang"
@@ -132,7 +132,6 @@ Start=$(date +"%s")
 if [ "$TOOLCHAIN" == clang  ]; then
 	echo clang
 	make -j$(nproc --all) O=out \
-                              ARCH=arm64 \
                               AR=llvm-ar \
                               NM=llvm-nm \
                               OBJCOPY=llvm-objcopy \
@@ -198,9 +197,8 @@ KERVER=$(make kernelversion)
                 mv Image.gz-dtb zImage
                 export ZIP="$KERNEL_NAME"-"$CODENAME"-"$DATE"
                 zip -r "$ZIP" *
-                curl -sLo zipsigner-3.0.jar https://raw.githubusercontent.com/shashank1436/anykernel/master/zipsigner-3.0.jar
+                curl -sLo zipsigner-3.0.jar https://raw.githubusercontent.com/shashank1436/anykernel/zipper/zipsigner-3.0.jar
                 java -jar zipsigner-3.0.jar "$ZIP".zip "$ZIP"-signed.zip
-                tg_post_msg "<b>=============================</b> %0A <b>× SleepyKernel For Redmi note 4/4x ×</b> %0A <b>=============================</b> %0A%0A <b>Date : </b> <code>$(TZ=India/Kolkata date)</code> %0A%0A <b>Device Code Name:</b> <code>$CODENAME</code> %0A%0A <b>Kernel Version :</b> <code>$KERVER</code> %0A%0A <b>Developer:</b> @jennifer1436 %0A%0A <b>Support group:</b> t.me/sleepyzzzz %0A%0A <b>Channel:</b> t.me/sleepyzzzzupdates %0A%0A <b>Changelog:</b> %0A https://github.com/shashank1436/kernel_xiaomi_mido/commits/r11 %0A%0A <b>Download Normal version:</b> %0A https://t.me/sleepyzzzzupdates/ %0A%0A <b>Download Overclock version:</b> %0A https://t.me/sleepyzzzzupdates/ %0A%0A <b>If you support my effort? Donate</b> %0A <b>Phonepe id:</b> <code>shashank1436@ybl</code> %0A%0A #sleepykernel #mido" "$CHATID"
                 tg_post_build "$ZIP"-signed.zip "$CHATID"
                 cd ..
                 rm -rf error.log
