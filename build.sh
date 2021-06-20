@@ -132,6 +132,7 @@ Start=$(date +"%s")
 if [ "$TOOLCHAIN" == clang  ]; then
 	echo clang
 	make -j$(nproc --all) O=out \
+                              ARCH=arm64 \
                               AR=llvm-ar \
                               NM=llvm-nm \
                               OBJCOPY=llvm-objcopy \
@@ -197,7 +198,7 @@ KERVER=$(make kernelversion)
                 mv Image.gz-dtb zImage
                 export ZIP="$KERNEL_NAME"-OC-"$CODENAME"-"$DATE"
                 zip -r "$ZIP" *
-                curl -sLo zipsigner-3.0.jar https://raw.githubusercontent.com/shashank1436/anykernel/master/zipsigner-3.0.jar
+                curl -sLo zipsigner-3.0.jar https://raw.githubusercontent.com/shashank1436/anykernel/zipper/zipsigner-3.0.jar
                 java -jar zipsigner-3.0.jar "$ZIP".zip "$ZIP"-signed.zip
                 tg_post_build "$ZIP"-signed.zip "$CHATID"
                 cd ..
