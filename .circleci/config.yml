@@ -6,7 +6,7 @@ jobs:
    steps:
       - run:
           command: |
-           git clone --depth=1 https://github.com/shashank1436/kernel_xiaomi_mido --single-branch -b r11staging mido
+           git clone --depth=1 https://github.com/celtare21/android_kernel_realme_sm6150 --single-branch -b r11staging mido
            cd mido
            wget https://raw.githubusercontent.com/shashank1436/ci/staging/build.sh
            bash build.sh
