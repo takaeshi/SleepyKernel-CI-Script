@@ -59,13 +59,16 @@ DEVICE="Redmi Note 4/4X"
 CODENAME="mido"
 KERNEL_NAME="SleepyKernel"
 
+# Kernel build release tag
+KRNL_REL_TAG="v4"
+
 DEFCONFIG="mido_defconfig"
 
 AnyKernel="https://github.com/shashank1436/anykernel"
 AnyKernelbranch="master"
 
-HOSST="shashank's buildbot"
-USEER="Shashank"
+HOSST="sleeping-bag"
+USEER="shashank"
 
 TOOLCHAIN="gcc"
 
@@ -196,8 +199,8 @@ KERVER=$(make kernelversion)
                 cp -r "$IMG" zip/
                 cd zip
                 mv Image.gz-dtb zImage
-                export ZIP="$KERNEL_NAME"-Stagging-"$CODENAME"-"$DATE"
-                zip -r "$ZIP" *
+                export ZIP="$KERNEL_NAME"-"$KRNL_REL_TAG"-Stagging-"$CODENAME"-"$DATE"
+                zip -r9 "$ZIP" * -x .git README.md LICENSE *placeholder
                 curl -sLo zipsigner-3.0.jar https://raw.githubusercontent.com/shashank1436/anykernel/zipper/zipsigner-3.0.jar
                 java -jar zipsigner-3.0.jar "$ZIP".zip "$ZIP"-signed.zip
                 tg_post_build "$ZIP"-signed.zip "$CHATID"
